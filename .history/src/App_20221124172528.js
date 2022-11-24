@@ -21,7 +21,7 @@ function App() {
       <BrowserRouter forceRefresh>
         <ScrollToTop>
           <Routes>
-          <Route path="/" element={<Home></Home>}></Route>
+          <Route path="/Home" element={<Home></Home>}></Route>
             <Route path="/Home" element={<Home></Home>}></Route>
             <Route path="/SanPham" element={<SanPham></SanPham>}></Route>
             <Route
