@@ -1,0 +1,207 @@
+import Header from "../component/Header";
+import { useLocation } from "react-router-dom";
+import { ReactSession } from "react-client-session";
+import { useState } from "react";
+import ImageFromFireBase from "../component/ImgFirebase";
+import formatter from "../changeCurrency";
+function Checkout() {
+  const location = useLocation();
+  const point = location.state.point;
+  const total = location.state.total;
+  const [items, setItems] = useState(ReactSession.get("cart"));
+  const displayCart = (list) => {
+    if (list === undefined) return;
+    return Object.keys(list).map((item, index) => {
+      return (
+        <tr key={item}>
+          <td className="cart_product">
+            <Link>
+              <ImageFromFireBase id={items[item].IdSanPham} />
+            </Link>
+          </td>
+          <td className="cart_description">
+            <h4>
+              <Link
+                to={"/SanPham/" + items[item].IdSanPham}
+                state={{ detail: items[item] }}
+              >
+                {items[item].Ten[0]}
+              </Link>
+            </h4>
+            <p>ID: {items[item].IdSanPham}</p>
+          </td>
+          <td className="cart_price">
+            <p>{formatter.format(Number(items[item].GiaNhap * 1.4))}</p>
+          </td>
+          <td className="cart_quantity">
+            <div className="cart_quantity_button">
+              <button
+                className="cart_quantity_up"
+                onClick={(e, i) => {
+                  plusQuantity(e, item);
+                }}
+              >
+                {" "}
+                +{" "}
+              </button>
+              <input
+                className="cart_quantity_input"
+                type="text"
+                name="quantity"
+                defaultValue={items[item].Quantity}
+                autoComplete="off"
+                size={2}
+              />
+              <button
+                className="cart_quantity_down"
+                onClick={(e, i) => {
+                  minusQuantity(e, item);
+                }}
+              >
+                {" "}
+                -{" "}
+              </button>
+            </div>
+          </td>
+          <td className="cart_total">
+            <p className="cart_total_price">
+              {formatter.format(
+                Number(items[item].GiaNhap * items[item].Quantity * 1.4)
+              )}
+            </p>
+          </td>
+          <td className="cart_delete">
+            <button
+              className="cart_quantity_delete"
+              onClick={(e, i) => {
+                removeItem(e, item);
+              }}
+            >
+              <i className="fa fa-times" />
+            </button>
+          </td>
+        </tr>
+      );
+    });
+  };
+  return (
+    <>
+      <Header></Header>
+      <section id="cart_items">
+        <div className="container">
+          <div className="register-req">
+            <button className="btn btn-primary" style={{ marginTop: "0px" }}>
+              Đăng nhập
+            </button>
+          </div>
+          {/*/register-req*/}
+          <div className="shopper-informations">
+            <div className="row">
+              <div className="col-sm-4">
+                <div className="shopper-info">
+                  <p>Shopper Information</p>
+                  <form>
+                    <input type="text" placeholder="Họ tên người nhận" />
+                    <input type="text" placeholder="Số điện thoại" />
+                    <input type="text" placeholder="Địa chỉ"></input>
+                    <select type="text" placeholder="Địa chỉ">
+                      <option hidden value>
+                        ---
+                      </option>
+                      <option value>TP.HCM</option>
+                    </select>
+                    <select type="text" placeholder="Địa chỉ">
+                      <option hidden value>
+                        ---
+                      </option>
+                      <option value>TP.HCM</option>
+                    </select>
+                    <select type="text" placeholder="Địa chỉ">
+                      <option hidden value>
+                        ---
+                      </option>
+                      <option value>TP.HCM</option>
+                    </select>
+                  </form>
+                </div>
+              </div>
+
+              <div className="col-sm-4">
+                <div className="order-message">
+                  <p>Hình thức thanh toán</p>
+                  <div className="radio_wrapper">
+                    <input type={"radio"} name="paymentMethod"></input>{" "}
+                    <span>Thanh toán trực tuyến</span>
+                  </div>
+                  <div className="radio_wrapper">
+                    <input type={"radio"} name="paymentMethod"></input>{" "}
+                    <span>Thanh toán qua Bank</span>
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-4">
+                <div className="order-message pay" style={{background:"#fafafa",padding:"0px 10px",borderRadius:"5px"}}>
+                  <p style={{color:"black"}}>Thanh toán</p>
+                  <hr className="solid" style={{background:"black"}}/>
+                  <div>
+                    <span>Tạm tính:</span>
+                    <span className="pull-right">100</span>
+                  </div>
+                  <div>
+                    <span>Tạm tính:</span>
+                    <span className="pull-right">100</span>
+                  </div>
+                  <hr className="solid" style={{background:"black"}}/>
+                  <div>
+                    <span style={{fontSize:"20px"}}>Tổng cộng:</span>
+                    <span style={{fontSize:"20px",color:"#fe980f"}} className="pull-right">100</span>
+                  </div>
+                  <button className="btn btn-primary pull-right" style={{fontSize:"20px",borderRadius:"5px"}}>
+                    Đặt hàng
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="review-payment">
+            <h2>Giỏ hàng</h2>
+          </div>
+          <div className="table-responsive cart_info">
+          <table className="table table-condensed">
+            <thead>
+              <tr className="cart_menu">
+                <td className="image">Sản phẩm</td>
+                <td className="description" />
+                <td className="price">Đơn giá</td>
+                <td className="quantity">Số lượng</td>
+                <td className="total">Tổng</td>
+                <td />
+              </tr>
+            </thead>
+            <tbody>{displayCart(items)}</tbody>
+          </table>
+        </div>
+          <div className="payment-options">
+            <span>
+              <label>
+                <input type="checkbox" /> Direct Bank Transfer
+              </label>
+            </span>
+            <span>
+              <label>
+                <input type="checkbox" /> Check Payment
+              </label>
+            </span>
+            <span>
+              <label>
+                <input type="checkbox" /> Paypal
+              </label>
+            </span>
+          </div>
+        </div>
+      </section>{" "}
+      {/*/#cart_items*/}
+    </>
+  );
+}
+export default Checkout;
