@@ -68,7 +68,7 @@ function Dashboard() {
       <h2 style={{ lineHeight: "25px" }} className="title text-center">
         Nổi bật
       </h2>
-      {displayItem(items)}
+      {items &&displayItem(items)}
     </div>
   );
 }
