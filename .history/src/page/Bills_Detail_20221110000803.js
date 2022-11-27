@@ -1,4 +1,0 @@
-function Detail(){
-
-}
-ex

@@ -1,4 +1,0 @@
-function Footer(){
-    return()
-}
-exp
