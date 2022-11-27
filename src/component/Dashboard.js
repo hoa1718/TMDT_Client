@@ -10,7 +10,8 @@ function Dashboard() {
     axios
       .get("http://tmdt-server.herokuapp/SanPham/")
       .then(async (res) => {
-        await setItems(res.data.data);
+        const result= await res.data.data;
+        await setItems(result);
       })
       .catch(function (error) {
         console.log(error);

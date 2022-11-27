@@ -11,7 +11,8 @@ function SanPham() {
     axios
       .get("http://tmdt-server.herokuapp/SanPham/")
       .then(async (res) => {
-        await setItems(res.data.data);
+        const result= await res.data.data;
+        await setItems(result);
       })
       .catch(function (error) {
         console.log(error);
@@ -31,8 +32,7 @@ function SanPham() {
                 <h2>{formatter.format(Number(items[item].GiaNhap * 1.4))}</h2>
                 <Link to={'/SanPham/'+items[item].IdSanPham} state={{detail: items[item]}} >
                 <p>{items[item].Ten[0]}</p>
-                </Link>
-                
+                </Link>        
                 <a href="#" className="btn btn-default add-to-cart">
                   <i className="fa fa-shopping-cart" />
                   Thêm vào giỏ
