@@ -24,6 +24,7 @@ function Dashboard() {
   const displayItem = (list) => {
     return Object.keys(list).map((item, i) => {
       if(Number(items[item].An)===1) return;
+      while(items=== undefined){continue;}
       return (      
         <div className="col-sm-4" key={item}>
           <div className="product-image-wrapper">
@@ -68,7 +69,7 @@ function Dashboard() {
       <h2 style={{ lineHeight: "25px" }} className="title text-center">
         Nổi bật
       </h2>
-      {items &&displayItem(items)}
+      {displayItem(items)}
     </div>
   );
 }
