@@ -70,7 +70,7 @@ function Checkout() {
   const getShipping = () => {
     axios
       .get(
-        "http://tmdt-server.herokuapp/KhachHang/DiaChi/" +
+        "http://tmdt-server.herokuapp.com/KhachHang/DiaChi/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {
@@ -179,7 +179,7 @@ function Checkout() {
     }
     else{ data["DiaChi"]=`${address}`}
     axios
-      .post("http://tmdt-server.herokuapp/HoaDon/create", data)
+      .post("http://tmdt-server.herokuapp.com/HoaDon/create", data)
       .then(async (res) => {});
   };
   useEffect(() => {

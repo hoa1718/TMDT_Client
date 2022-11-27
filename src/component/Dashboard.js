@@ -8,7 +8,7 @@ function Dashboard() {
   const [items, setItems] = useState([]);
   const getItems = async () => {
     axios
-      .get("http://tmdt-server.herokuapp/SanPham/")
+      .get("http://tmdt-server.herokuapp.com/SanPham/")
       .then(async (res) => {
         const result= await res.data.data;
         await setItems(result);

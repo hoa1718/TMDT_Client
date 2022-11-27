@@ -9,7 +9,7 @@ function Header() {
   const [hang, setHang] = useState([]);
   const getHang = async () => {
     axios
-      .get("http://tmdt-server.herokuapp/Hang/")
+      .get("http://tmdt-server.herokuapp.com/Hang/")
       .then(async (res) => {
         await setHang(res.data.data);
       })

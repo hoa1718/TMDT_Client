@@ -5,7 +5,7 @@ function Category() {
   const [hang, setHang] = useState([]);
   const getPhim = async () => {
     axios
-      .get("http://tmdt-server.herokuapp/Phim/")
+      .get("http://tmdt-server.herokuapp.com/Phim/")
       .then(async (res) => {
         await setPhim(res.data.data);
       })
@@ -15,7 +15,7 @@ function Category() {
   };
   const getHang = async () => {
     axios
-      .get("http://tmdt-server.herokuapp/Hang/")
+      .get("http://tmdt-server.herokuapp.com/Hang/")
       .then(async (res) => {
         await setHang(res.data.data);
       })
