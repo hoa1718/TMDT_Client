@@ -8,7 +8,7 @@ function Dashboard() {
   const [items, setItems] = useState([]);
   const getItems = async () => {
     axios
-      .get("http://tmdt-server.herokuapp.com/SanPham/")
+      .get("http://tmdt-server.herokuapp.com/SanPham/",{ headers: {'Content-Type': 'application/json'}})
       .then(async (res) => {
         const result= await res.data.data;
         await setItems(result);
@@ -23,7 +23,7 @@ function Dashboard() {
   },[]);
   const displayItem = (list) => {
     return Object.keys(list).map((item, i) => {
-      if(Number(items[item].An)===1) return;
+      if(Number(items[item].An)===1) return null;
       while(items=== undefined){continue;}
       return (      
         <div className="col-sm-4" key={item}>
