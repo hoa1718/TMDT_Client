@@ -1,4 +1,0 @@
-c
-onst addToCart = ()=>{
-
-}
