@@ -10,7 +10,7 @@ function Bills() {
   const getBills = () => {
     axios
       .get(
-        "http://localhost:4000/HoaDon/KhachHang/" +
+        "http://tmdt-server.herokuapp.com/HoaDon/KhachHang/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {
