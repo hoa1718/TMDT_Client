@@ -9,10 +9,12 @@ const addToCart = (item)=>{
         item['Quantity']=Number(1);
         cart.push(item);
         ReactSession.set("cart",cart);
+        alert(`Đã thêm sản phẩm vào giỏ`)
     }
     else{
-        cart[i].Quantity+=1;
-        ReactSession.set("cart",cart);
+        alert(`Đã có ${item.Ten[0]} trong giỏ`)
+        // cart[i].Quantity+=1;
+        // ReactSession.set("cart",cart);
     }
     
 }

@@ -1,6 +1,43 @@
 import Header from "../component/Header";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { ReactSession } from "react-client-session";
+
 function Bills() {
+  const [bills, setBills] = useState([]);
+  ReactSession.setStoreType("localStorage");
+  const getBills = () => {
+    axios
+      .get(
+        "http://localhost:4000/HoaDon/KhachHang/" +
+          ReactSession.get("user").IdTaiKhoan
+      )
+      .then(async (res) => {
+        await setBills(res.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const displayBills = (list) => {
+    return Object.keys(list).map((item, i) => {
+      return (
+        <tr key={item}>
+          <td>
+            <Link to={"/Bills/"+list[item].IdHoaDon}>{list[item].IdHoaDon}</Link>
+          </td>
+          <td>{list[item].NgayMua}</td>
+          <td>828 Sư vạn hạnh</td>
+          <td>1.050.000đ</td>
+          <td>{list[item].TrangThaiDonHang===0?"Chờ xác nhận" :"Hoàn thành"}</td>
+        </tr>
+      );
+    });
+  };
+  useEffect(() => {
+    getBills();
+  }, []);
   return (
     <>
       <Header></Header>
@@ -20,14 +57,7 @@ function Bills() {
                   </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                      <td><Link to={"/Bills/1"}>1</Link></td>
-                      <td>09/11/2022</td>
-                      <td>828 Sư vạn hạnh</td>
-                      <td>1.050.000đ</td>
-                      <td>Hoàn thành</td>
-                    </tr>
-                  
+                  {displayBills(bills)}
                 </tbody>
               </table>
             </div>
