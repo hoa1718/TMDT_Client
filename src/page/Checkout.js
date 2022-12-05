@@ -1,13 +1,15 @@
 import Header from "../component/Header";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import { ReactSession } from "react-client-session";
 import { useEffect, useState } from "react";
 import ImageFromFireBase from "../component/ImgFirebase";
 import formatter from "../changeCurrency";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import getUser from "../handler/getUser";
 function Checkout() {
   const location = useLocation();
+  let navigate=useNavigate();
   const point = location.state.point;
   const total = location.state.total;
   ReactSession.setStoreType("localStorage");
@@ -79,25 +81,6 @@ function Checkout() {
   };
   const displayShipping = (list) => {
     return Object.keys(list).map((item, index) => {
-        // if (Number(shipping[item].DiaChiMacDinh) === 1) {
-        //   return (
-        //     <div className="radio_wrapper">
-        //       <input
-        //         type={"radio"}
-        //         name="shipping"
-        //         checked
-        //         onChange={(e) => {
-        //           setAddress(shipping[item].DiaChi);
-        //           setPhone(shipping[item].SDT);
-        //           setName(shipping[item].HoTenNguoiNhan);
-        //         }}
-        //       ></input>{" "}
-        //       <span>{shipping[item].HoTenNguoiNhan}, </span>
-        //       <span>{shipping[item].SDT}, </span>
-        //       <span>{shipping[item].DiaChi}</span>
-        //     </div>
-        //   );
-        // }
       return (
         <div className="radio_wrapper">
           <input type={"radio"} name="shipping"  onChange={(e) => {
@@ -180,7 +163,13 @@ function Checkout() {
     else{ data["DiaChi"]=`${address}`}
     axios
       .post("http://localhost:4000/HoaDon/create", data)
-      .then(async (res) => {});
+      .then(async (res) => {if(res.data.message==="Yes"){
+        alert("Thanh toán thành công!");
+        getUser(data.User.IdTaiKhoan);
+        navigate('/Home');
+      }})
+      .catch((err)=>{alert(err.response.data.message)});
+      
   };
   useEffect(() => {
     getProvince();
