@@ -84,7 +84,7 @@ function Checkout() {
       return (
         <div className="radio_wrapper">
           <input type={"radio"} name="shipping"  onChange={(e) => {
-                setAddress(shipping[item].DiaChi);
+                setAddress(shipping[item].IdDiaChi);
                 setPhone(shipping[item].SDT);
                 setName(shipping[item].HoTenNguoiNhan);
               }} ></input>{" "}
@@ -161,11 +161,13 @@ function Checkout() {
       },${provinceSel.options[provinceSel.selectedIndex].text}`
     }
     else{ data["DiaChi"]=`${address}`}
+    console.log(address);
     axios
       .post("http://localhost:4000/HoaDon/create", data)
       .then(async (res) => {if(res.data.message==="Yes"){
         alert("Thanh toán thành công!");
         getUser(data.User.IdTaiKhoan);
+        ReactSession.set("cart",[])
         navigate('/Home');
       }})
       .catch((err)=>{alert(err.response.data.message)});
@@ -206,7 +208,7 @@ function Checkout() {
                   </div>
                 ) : (
                   <div className="shopper-info order-message">
-                    <p>Shopper Information</p>
+                    <p>Thông tin nhận hàng</p>
                     <form>
                       <input
                         type="text"

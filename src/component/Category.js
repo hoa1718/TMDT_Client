@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { useState, useEffect } from "react";
 function Category() {
   const [phim, setPhim] = useState([]);

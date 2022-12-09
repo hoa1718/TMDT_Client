@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ReactSession } from "react-client-session";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import ImageFromFireBase from "../component/ImgFirebase";
 import formatter from "../changeCurrency";
 function Cart({ changeTotal }) {
@@ -11,7 +11,10 @@ function Cart({ changeTotal }) {
       return (
         <tr key={item}>
           <td className="cart_product">
-            <Link>
+            <Link
+              to={"/SanPham/" + items[item].IdSanPham}
+              state={{ detail: items[item] }}
+            >
               <ImageFromFireBase id={items[item].IdSanPham} />
             </Link>
           </td>
@@ -115,26 +118,25 @@ function Cart({ changeTotal }) {
     });
     changeTotal();
   };
-  useEffect(()=>{
-    changeTotal()
-  })
+  useEffect(() => {
+    changeTotal();
+  });
   return (
-        <div className="table-responsive cart_info">
-          <table className="table table-condensed">
-            <thead>
-              <tr className="cart_menu">
-                <td className="image">Sản phẩm</td>
-                <td className="description" />
-                <td className="price">Đơn giá</td>
-                <td className="quantity">Số lượng</td>
-                <td className="total">Tổng</td>
-                <td />
-              </tr>
-            </thead>
-            <tbody>{displayCart(items)}</tbody>
-          </table>
-        </div>
-
+    <div className="table-responsive cart_info">
+      <table className="table table-condensed">
+        <thead>
+          <tr className="cart_menu">
+            <td className="image">Sản phẩm</td>
+            <td className="description" />
+            <td className="price">Đơn giá</td>
+            <td className="quantity">Số lượng</td>
+            <td className="total">Tổng</td>
+            <td />
+          </tr>
+        </thead>
+        <tbody>{displayCart(items)}</tbody>
+      </table>
+    </div>
   );
 }
 export default Cart;

@@ -19,7 +19,7 @@ function SanPham() {
   };
   const displayItem = (list) => {
     return Object.keys(list).map((item, i) => {
-      if(Number(items[item].An)===1) return;  
+      if(Number(items[item].An)===1) return null;  
       return (
         <div className="col-sm-4">
           <div className="product-image-wrapper">

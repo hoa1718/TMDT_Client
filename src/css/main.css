@@ -2553,3 +2553,12 @@ textarea {
 hr{
   border-top: 1px solid rgb(138, 138, 138) !important;
 }
+.billDetail{
+  width: 200px;
+}
+.billDetail img{
+  width: 150px;
+  height:150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
