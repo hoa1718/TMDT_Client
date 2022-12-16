@@ -6,6 +6,7 @@ import formatter from "../changeCurrency";
 import { Link } from "react-router-dom";
 import axios from "axios";
 function SanPham() {
+  const params=window.location.pathname.split("/");
   const [items, setItems] = useState([]);
   const getItems = async () => {
     axios
@@ -20,8 +21,25 @@ function SanPham() {
   const displayItem = (list) => {
     return Object.keys(list).map((item, i) => {
       if(Number(items[item].An)===1) return null;  
+      if(params[2]!==undefined){
+        switch (params[2]){
+          case "Phim":{
+            if(items[item].IdPhim!== Number(params[3])) return ;
+            break;
+          }
+          case "TheLoai":{
+            console.log(items[item].TheLoai===params[3]);
+            if(items[item].TheLoai!== params[3]) return ;
+            break;
+          }
+          case "Hang":{
+            if(items[item].IdHangSx!== Number(params[3])) return null;
+            break;
+          }
+        }
+      }
       return (
-        <div className="col-sm-4">
+        <div className="col-sm-4" key={item}>
           <div className="product-image-wrapper">
             <div className="single-products">
               <div className="productinfo text-center">
@@ -33,7 +51,7 @@ function SanPham() {
                 <p>{items[item].Ten[0]}</p>
                 </Link>
                 
-                <a href="#" className="btn btn-default add-to-cart">
+                <a className="btn btn-default add-to-cart">
                   <i className="fa fa-shopping-cart" />
                   Thêm vào giỏ
                 </a>

@@ -33,7 +33,7 @@ function Category() {
               <a
                 data-toggle="collapse"
                 data-parent="#accordian"
-                href="#sportswear"
+                onClick={() => {window.location.href="/SanPham/Phim/"+phim[item].IdPhim}}
               >
                 {phim[item].TenPhim}
               </a>
@@ -48,7 +48,7 @@ function Category() {
     return Object.keys(list).map((item, i) => {
       return (
         <li key={i}>
-        <a href="#">
+        <a onClick={() => {window.location.href="/SanPham/Phim/"+hang[item].IdHangSx}}>
           <span className="pull-right">({hang[item].SoSP})</span>{hang[item].Ten}
         </a>
       </li>

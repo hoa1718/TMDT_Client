@@ -166,9 +166,10 @@ function Checkout() {
       .post("http://localhost:4000/HoaDon/create", data)
       .then(async (res) => {if(res.data.message==="Yes"){
         alert("Thanh toán thành công!");
-        getUser(data.User.IdTaiKhoan);
-        ReactSession.set("cart",[])
+        ReactSession.set('cart',[]);
         navigate('/Home');
+        getUser(data.User.IdTaiKhoan);       
+        window.location.reload();
       }})
       .catch((err)=>{alert(err.response.data.message)});
       

@@ -7,6 +7,7 @@ function Header() {
   ReactSession.setStoreType("localStorage");
   const [user, setUser] = useState(ReactSession.get("user"));
   const [hang, setHang] = useState([]);
+  const [type, setType] = useState([]);
   const getHang = async () => {
     axios
       .get("http://localhost:4000/Hang/")
@@ -17,17 +18,37 @@ function Header() {
         console.log(error);
       });
   };
+  const getType = async () => {
+    axios
+      .get("http://localhost:4000/PhanLoai/")
+      .then(async (res) => {
+        await setType(res.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
   const displayHang = (list) => {
     return Object.keys(list).map((item, i) => {
       return (
         <li key={i}>
-          <a href="blog.html">{hang[item].Ten}</a>
+          <a onClick={() => {window.location.href="/SanPham/Hang/"+hang[item].IdHangSx}}>{hang[item].Ten}</a>
+        </li>
+      );
+    });
+  };
+  const displayType = (list) => {
+    return Object.keys(list).map((item, i) => {
+      return (
+        <li key={i}>
+          <a onClick={() => {window.location.href="/SanPham/TheLoai/"+type[item].TenLoai}}>{type[item].TenLoai}</a>
         </li>
       );
     });
   };
   useEffect(() => {
     getHang();
+    getType();
   }, []);
   return (
     <header id="header">
@@ -78,8 +99,8 @@ function Header() {
                     )}
                   </li>
                   <li>
-                    <Link>
-                      <i className="fa fa-star" /> Yêu thích
+                    <Link to="/YeuThich">
+                    <i className="fa-solid fa-heart"></i> Yêu thích
                     </Link>
                   </li>
                   <li>
@@ -126,16 +147,19 @@ function Header() {
                     <Link to={"/SanPham"}>Sản phẩm</Link>
                   </li>
                   <li className="dropdown">
-                    <a href="#">
+                    <p>
                       Thể loại
                       <i className="fa fa-angle-down" />
-                    </a>
+                    </p>
+                    <ul role="menu" className="sub-menu">
+                      {displayType(type)}
+                    </ul>
                   </li>
                   <li className="dropdown">
-                    <a>
+                    <p>
                       Hãng
                       <i className="fa fa-angle-down" />
-                    </a>
+                    </p>
                     <ul role="menu" className="sub-menu">
                       {displayHang(hang)}
                     </ul>

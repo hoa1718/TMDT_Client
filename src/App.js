@@ -7,7 +7,11 @@ import Bills_Detail from "./page/Bills_Detail";
 import ScrollToTop from "./component/ScrollToTop";
 import SanPham from "./page/SanPham";
 import Cart from "./page/Cart";
-import Checkout from "./page/Checkout"
+import Checkout from "./page/Checkout";
+import Favorite from "./page/Favorite";
+import UserInfor from "./page/User_Infor";
+import Password from "./page/Password";
+import Address from "./page/Address";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./css/main.css";
 import "./css/bootstrap.min.css";
@@ -35,8 +39,15 @@ function App() {
             ></Route>
             <Route path="/Login" element={<Login></Login>}></Route>
             <Route path="/User/:id" element={<User></User>}></Route>
+            <Route path="/User/Information" element={<UserInfor></UserInfor>}></Route>
+            <Route path="/User/Password" element={<Password></Password>}></Route>
+            <Route path="/User/Address" element={<Address></Address>}></Route>
             <Route path="/Cart" element={<Cart>/</Cart>}></Route>
             <Route path="/Checkout" element={<Checkout></Checkout>}></Route>
+            <Route path="/YeuThich" element={<Favorite></Favorite>}></Route>
+            <Route path="/SanPham/Hang/:id" element={<SanPham></SanPham>}></Route>
+            <Route path="/SanPham/Phim/:id" element={<SanPham></SanPham>}></Route>
+            <Route path="/SanPham/TheLoai/:id" element={<SanPham></SanPham>}></Route>
           </Routes>
         </ScrollToTop>
       </BrowserRouter>

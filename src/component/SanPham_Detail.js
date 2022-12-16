@@ -48,7 +48,7 @@ function Detail({ props }) {
             <b>Phim:</b> {detail.TenPhim}
           </p>
           <p>
-            <b>Thể loại:</b> {detail.TenLoai}
+            <b>Thể loại:</b> {detail.TheLoai}
           </p>
           <p>
             <b>Hãng:</b> {detail.Ten[1]}
@@ -60,20 +60,19 @@ function Detail({ props }) {
           <p>
             <b>Trọng lượng:</b> {detail.TrongLuong}kg
           </p>
-          <span>
-            <label>Số lượng:</label>
-            <input type="number" defaultValue={1} min={1} />
-          </span>
           <p>
+            <b>Đã bán:</b> {detail.SLBan}
+          </p>
+          <p style={{marginTop:"10px"}}>
             <button type="button" className="btn cart">
-              <i className="fa fa-shopping-cart" />
+              <i className="fa fa-shopping-cart" style={{marginRight:"10px"}} />
               Thêm vào giỏ
             </button>
             <button type="button" className="btn favorite circle">
-              <i className="fa fa-solid fa-heart"></i>
+              <i className="fa fa-solid fa-heart"style={{marginTop:"1px"}} ></i>
             </button>
             <button type="button" className="btn compare circle">
-              <i className="fa fa-solid fa-code-compare"></i>
+              <i className="fa fa-solid fa-code-compare" style={{marginTop:"1px"}}></i>
             </button>
           </p>
         </div>
