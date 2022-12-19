@@ -22,6 +22,7 @@ a:hover {
 }
 button{
   border: none;
+  background: none;
 }
 
 a:focus {
@@ -34,6 +35,7 @@ a {
   -moz-transition: 300ms;
   -o-transition: 300ms;
   transition: 300ms;
+  color: #363432;
 }
 
 h1,
@@ -241,7 +243,7 @@ a#scrollUp i {
   padding-left: 0px;
 }
 
-.mainmenu ul li a {
+.mainmenu ul li a, .mainmenu ul li p{
   color: #696763;
   font-family: "Roboto", sans-serif;
   font-size: 17px;
@@ -981,7 +983,7 @@ h2.title {
   border-top: 1px solid #f7f7f0;
 }
 
-.choose ul li a {
+.choose ul li a ,.choose ul li button  {
   color: #b3afa8;
   font-family: "Roboto", sans-serif;
   font-size: 13px;
@@ -989,11 +991,11 @@ h2.title {
   padding-right: 0;
 }
 
-.choose ul li a i {
+.choose ul li a i,.choose ul li button li {
   margin-right: 5px;
 }
 
-.choose ul li a:hover {
+.choose ul li a:hover,.choose ul li button :hover {
   background: none;
   color: #fe980f;
 }
@@ -1318,8 +1320,8 @@ h2.title {
 }
 .circle i {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 52%;
+  left: 51%;
   transform: translate(-50%, -50%);
   display: block;
 }
@@ -2552,4 +2554,19 @@ textarea {
 }
 hr{
   border-top: 1px solid rgb(138, 138, 138) !important;
+}
+.billDetail{
+  width: 200px;
+}
+.billDetail img,.favor img{
+  width: 150px;
+  height:150px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.createAddress,.updateAddress{
+  margin-top: 15px;
+}
+.input-group{
+  margin-bottom: 10px;
 }
