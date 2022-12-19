@@ -12,7 +12,7 @@ function Bills() {
   const getShipping = () => {
     axios
       .get(
-        "http://localhost:5000/KhachHang/DiaChi/" +
+        "http://tmdt-server.herokuapp.com/KhachHang/DiaChi/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {

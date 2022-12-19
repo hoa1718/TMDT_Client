@@ -22,7 +22,7 @@ function Infor() {
       email:email
     }
     axios
-    .post("http://localhost:5000/KhachHang/update/info",data).then(async(result)=>{
+    .post("http://tmdt-server.herokuapp.com/KhachHang/update/info",data).then(async(result)=>{
       if(result.data==="Yes"){
         alert("Thay đổi thành công");
         navigate(`/User/${ReactSession.get('user').IdTaiKhoan}`)

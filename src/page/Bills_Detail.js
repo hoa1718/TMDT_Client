@@ -16,7 +16,7 @@ function Detail() {
   const address = location.state.address;
   const getDetail = () => {
     axios
-      .get("http://localhost:5000/HoaDon/Detail/" + bill.IdHoaDon)
+      .get("http://tmdt-server.herokuapp.com/HoaDon/Detail/" + bill.IdHoaDon)
       .then(async (res) => {
         await setDetail(res.data.data);
         await setProduct(res.data.product);

@@ -15,7 +15,7 @@ function Address() {
   const getShipping = () => {
     axios
       .get(
-        "http://localhost:5000/KhachHang/DiaChi/" +
+        "http://tmdt-server.herokuapp.com/KhachHang/DiaChi/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {
@@ -109,7 +109,7 @@ function Address() {
       ID: id,
     };
     axios
-      .post("http://localhost:5000/KhachHang/update/address", data)
+      .post("http://tmdt-server.herokuapp.com/KhachHang/update/address", data)
       .then(async (res) => {
         if (res.data === "Yes") {
           alert("Thay đổi thành công");
@@ -139,7 +139,7 @@ function Address() {
       User:ReactSession.get('user').IdTaiKhoan
     };
     axios
-    .post("http://localhost:5000/KhachHang/create/address", data)
+    .post("http://tmdt-server.herokuapp.com/KhachHang/create/address", data)
     .then(async (res) => {
       if (res.data === "Yes") {
         alert("Tạo thành công");
