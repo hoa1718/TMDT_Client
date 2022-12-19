@@ -2564,7 +2564,7 @@ hr{
   object-fit: cover;
   border-radius: 5px;
 }
-.createAddress{
+.createAddress,.updateAddress{
   margin-top: 15px;
 }
 .input-group{

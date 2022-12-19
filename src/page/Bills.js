@@ -12,7 +12,7 @@ function Bills() {
   const getShipping = () => {
     axios
       .get(
-        "http://localhost:4000/KhachHang/DiaChi/" +
+        "http://localhost:5000/KhachHang/DiaChi/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {
@@ -22,7 +22,7 @@ function Bills() {
   const getBills = () => {
     axios
       .get(
-        "http://localhost:4000/HoaDon/KhachHang/" +
+        "http://localhost:5000/HoaDon/KhachHang/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {

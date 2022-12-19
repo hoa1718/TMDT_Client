@@ -72,7 +72,7 @@ function Checkout() {
   const getShipping = () => {
     axios
       .get(
-        "http://localhost:4000/KhachHang/DiaChi/" +
+        "http://localhost:5000/KhachHang/DiaChi/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {
@@ -163,7 +163,7 @@ function Checkout() {
     else{ data["DiaChi"]=`${address}`}
     console.log(address);
     axios
-      .post("http://localhost:4000/HoaDon/create", data)
+      .post("http://localhost:5000/HoaDon/create", data)
       .then(async (res) => {if(res.data.message==="Yes"){
         alert("Thanh toán thành công!");
         ReactSession.set('cart',[]);

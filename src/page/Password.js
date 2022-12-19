@@ -35,7 +35,7 @@ function Password() {
         password:newPassword
       }
       axios
-      .post("http://localhost:4000/KhachHang/update/password",data).then(async(result)=>{
+      .post("http://localhost:5000/KhachHang/update/password",data).then(async(result)=>{
         if(result.data==="Yes"){
           getUser(data.id);
           alert("Thay đổi thành công");

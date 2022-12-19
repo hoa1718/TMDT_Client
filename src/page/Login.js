@@ -35,7 +35,7 @@ function Login() {
       username:username,
       password:password
     }
-    axios.post("http://localhost:4000/Login/authentication",data).then((res)=>{
+    axios.post("http://localhost:5000/Login/authentication",data).then((res)=>{
       if(res.data.IdTaiKhoan){
         alert("Xin chào "+ res.data.TenKhachHang);
         ReactSession.set("user", res.data);
@@ -74,7 +74,7 @@ function Login() {
       email:email,
       password:newPassword
     }
-    axios.post("http://localhost:4000/Login/registration",data).then((res)=>{
+    axios.post("http://localhost:5000/Login/registration",data).then((res)=>{
       alert(res.data)
       if(res.data==="Đăng ký thành công"){
         window.location.reload();

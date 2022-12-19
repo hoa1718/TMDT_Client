@@ -6,7 +6,7 @@ function Category() {
   const [hang, setHang] = useState([]);
   const getPhim = async () => {
     axios
-      .get("http://localhost:4000/Phim/")
+      .get("http://localhost:5000/Phim/")
       .then(async (res) => {
         await setPhim(res.data.data);
       })
@@ -16,7 +16,7 @@ function Category() {
   };
   const getHang = async () => {
     axios
-      .get("http://localhost:4000/Hang/")
+      .get("http://localhost:5000/Hang/")
       .then(async (res) => {
         await setHang(res.data.data);
       })

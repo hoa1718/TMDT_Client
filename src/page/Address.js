@@ -4,6 +4,10 @@ import { ReactSession } from "react-client-session";
 import axios from "axios";
 function Address() {
   ReactSession.setStoreType("localStorage");
+  const [id, setID] = useState(0);
+  const [name, setName] = useState();
+  const [phone, setPhone] = useState();
+  const [address, setAddress] = useState();
   const [shipping, setShipping] = useState([]);
   const [province, setProvince] = useState([]);
   const [district, setDistrict] = useState([]);
@@ -11,7 +15,7 @@ function Address() {
   const getShipping = () => {
     axios
       .get(
-        "http://localhost:4000/KhachHang/DiaChi/" +
+        "http://localhost:5000/KhachHang/DiaChi/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {
@@ -33,6 +37,21 @@ function Address() {
                 color: "white",
                 borderRadius: "5px",
                 padding: "5px 10px",
+              }}
+              onClick={() => {
+                document.querySelector(".createAddress").style.display = "none";
+                document.querySelector(".updateAddress").style.display =
+                  "block";
+                document.querySelectorAll(".name")[1].value =
+                  shipping[item].HoTenNguoiNhan;
+                document.querySelectorAll(".phone")[1].value =
+                  shipping[item].SDT;
+                document.querySelectorAll(".place")[1].value =
+                  shipping[item].DiaChi;
+                setName(shipping[item].HoTenNguoiNhan);
+                setPhone(shipping[item].SDT);
+                setAddress(shipping[item].DiaChi);
+                setID(shipping[item].IdDiaChi);
               }}
             >
               Sửa
@@ -78,6 +97,57 @@ function Address() {
       return <option value={ward[item].code}>{ward[item].name}</option>;
     });
   };
+  const update = () => {
+    if (name === undefined || phone === undefined || address === undefined) {
+      alert("Mời nhập đủ thông tin");
+      return;
+    }
+    const data = {
+      TenNguoiNhan: name,
+      SDT: phone,
+      DiaChi: address,
+      ID: id,
+    };
+    axios
+      .post("http://localhost:5000/KhachHang/update/address", data)
+      .then(async (res) => {
+        if (res.data === "Yes") {
+          alert("Thay đổi thành công");
+          window.location.reload();
+        }
+      });
+  };
+  const create = () => {
+    const provinceSel = document.querySelector("#province");
+    const districtSel = document.querySelector("#district");
+    const wardSel = document.querySelector("#ward");
+      if (
+        name === undefined ||
+        phone === undefined ||
+        address === undefined ||
+        Number(provinceSel.value) === 0
+      ) {
+        alert("Mời nhập đủ thông tin");
+        return;
+      }
+    const data = {
+      TenNguoiNhan: name,
+      SDT: phone,
+      DiaChi: `${address}, ${wardSel.options[wardSel.selectedIndex].text},${
+        districtSel.options[districtSel.selectedIndex].text
+      },${provinceSel.options[provinceSel.selectedIndex].text}`,
+      User:ReactSession.get('user').IdTaiKhoan
+    };
+    axios
+    .post("http://localhost:5000/KhachHang/create/address", data)
+    .then(async (res) => {
+      if (res.data === "Yes") {
+        alert("Tạo thành công");
+        window.location.reload();
+      }
+    });
+    console.log(data);
+  };
   useEffect(() => {
     getShipping();
     getProvince();
@@ -110,6 +180,8 @@ function Address() {
                   padding: "5px 10px",
                 }}
                 onClick={() => {
+                  document.querySelector(".updateAddress").style.display =
+                    "none";
                   const a = document.querySelector(".createAddress");
                   a.style.display = "block";
                 }}
@@ -128,9 +200,10 @@ function Address() {
                         Tên người nhận
                       </span>
                       <input
-                        type="password"
-                        className="form-control"
+                        type="text"
+                        className="form-control name"
                         aria-describedby="basic-addon2"
+                        onChange={(e) => setName(e.target.value)}
                       />
                     </div>
                     <div className="input-group">
@@ -138,9 +211,10 @@ function Address() {
                         Sđt
                       </span>
                       <input
-                        type="password"
-                        className="form-control"
+                        type="number"
+                        className="form-control phone"
                         aria-describedby="basic-addon2"
+                        onChange={(e) => setPhone(e.target.value)}
                       />
                     </div>
                     <div className="input-group">
@@ -148,9 +222,10 @@ function Address() {
                         Địa chỉ
                       </span>
                       <input
-                        type="password"
-                        className="form-control"
+                        type="test"
+                        className="form-control place"
                         aria-describedby="basic-addon2"
+                        onChange={(e) => setAddress(e.target.value)}
                       />
                     </div>
                     <select
@@ -188,11 +263,72 @@ function Address() {
                         color: "white",
                         borderRadius: "5px",
                         padding: "5px 10px",
-                        marginTop:"10px"
+                        marginTop: "10px",
                       }}
-                      
+                      onClick={() => {
+                        create();
+                      }}
                     >
-                      <i className="fa-solid fa-floppy-disk"  style={{ marginRight: "5px" }}></i>
+                      <i
+                        className="fa-solid fa-floppy-disk"
+                        style={{ marginRight: "5px" }}
+                      ></i>
+                      Lưu
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="updateAddress" style={{ display: "none" }}>
+                <div className="row">
+                  <div className="col-sm-8">
+                    <div className="input-group">
+                      <span className="input-group-addon" id="basic-addon2">
+                        Tên người nhận
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control name"
+                        aria-describedby="basic-addon2"
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                    </div>
+                    <div className="input-group">
+                      <span className="input-group-addon" id="basic-addon2">
+                        Sđt
+                      </span>
+                      <input
+                        type="number"
+                        className="form-control phone"
+                        aria-describedby="basic-addon2"
+                        onChange={(e) => setPhone(e.target.value)}
+                      />
+                    </div>
+                    <div className="input-group">
+                      <span className="input-group-addon" id="basic-addon2">
+                        Địa chỉ
+                      </span>
+                      <input
+                        type="test"
+                        className="form-control place"
+                        aria-describedby="basic-addon2"
+                        onChange={(e) => setAddress(e.target.value)}
+                      />
+                    </div>
+                    <button
+                      className="btn pull-right"
+                      style={{
+                        background: "#fe980f",
+                        color: "white",
+                        borderRadius: "5px",
+                        padding: "5px 10px",
+                        marginTop: "10px",
+                      }}
+                      onClick={() => update()}
+                    >
+                      <i
+                        className="fa-solid fa-floppy-disk"
+                        style={{ marginRight: "5px" }}
+                      ></i>
                       Lưu
                     </button>
                   </div>

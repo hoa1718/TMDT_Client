@@ -10,7 +10,7 @@ function SanPham() {
   const [items, setItems] = useState([]);
   const getItems = async () => {
     axios
-      .get("http://localhost:4000/SanPham/")
+      .get("http://localhost:5000/SanPham/")
       .then(async (res) => {
         await setItems(res.data.data);
       })

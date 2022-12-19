@@ -10,7 +10,7 @@ function Header() {
   const [type, setType] = useState([]);
   const getHang = async () => {
     axios
-      .get("http://localhost:4000/Hang/")
+      .get("http://localhost:5000/Hang/")
       .then(async (res) => {
         await setHang(res.data.data);
       })
@@ -20,7 +20,7 @@ function Header() {
   };
   const getType = async () => {
     axios
-      .get("http://localhost:4000/PhanLoai/")
+      .get("http://localhost:5000/PhanLoai/")
       .then(async (res) => {
         await setType(res.data.data);
       })
