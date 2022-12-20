@@ -35,7 +35,7 @@ function Password() {
         password:newPassword
       }
       axios
-      .post("http://tmdt-server.herokuapp.com/KhachHang/update/password",data).then(async(result)=>{
+      .post("https://tmdt-client.onrender.com/KhachHang/update/password",data).then(async(result)=>{
         if(result.data==="Yes"){
           getUser(data.id);
           alert("Thay đổi thành công");

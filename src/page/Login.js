@@ -35,7 +35,7 @@ function Login() {
       username:username,
       password:password
     }
-    axios.post("http://tmdt-server.herokuapp.com/Login/authentication",data).then((res)=>{
+    axios.post("https://tmdt-client.onrender.com/Login/authentication",data).then((res)=>{
       if(res.data.IdTaiKhoan){
         alert("Xin chào "+ res.data.TenKhachHang);
         ReactSession.set("user", res.data);
@@ -74,7 +74,7 @@ function Login() {
       email:email,
       password:newPassword
     }
-    axios.post("http://tmdt-server.herokuapp.com/Login/registration",data).then((res)=>{
+    axios.post("https://tmdt-client.onrender.com/Login/registration",data).then((res)=>{
       alert(res.data)
       if(res.data==="Đăng ký thành công"){
         window.location.reload();

@@ -72,7 +72,7 @@ function Checkout() {
   const getShipping = () => {
     axios
       .get(
-        "http://tmdt-server.herokuapp.com/KhachHang/DiaChi/" +
+        "https://tmdt-client.onrender.com/KhachHang/DiaChi/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {
@@ -163,7 +163,7 @@ function Checkout() {
     else{ data["DiaChi"]=`${address}`}
     console.log(address);
     axios
-      .post("http://tmdt-server.herokuapp.com/HoaDon/create", data)
+      .post("https://tmdt-client.onrender.com/HoaDon/create", data)
       .then(async (res) => {if(res.data.message==="Yes"){
         alert("Thanh toán thành công!");
         ReactSession.set('cart',[]);

@@ -12,7 +12,7 @@ function Bills() {
   const getShipping = () => {
     axios
       .get(
-        "http://tmdt-server.herokuapp.com/KhachHang/DiaChi/" +
+        "https://tmdt-client.onrender.com/KhachHang/DiaChi/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {
@@ -22,7 +22,7 @@ function Bills() {
   const getBills = () => {
     axios
       .get(
-        "http://tmdt-server.herokuapp.com/HoaDon/KhachHang/" +
+        "https://tmdt-client.onrender.com/HoaDon/KhachHang/" +
           ReactSession.get("user").IdTaiKhoan
       )
       .then(async (res) => {

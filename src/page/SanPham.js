@@ -10,7 +10,7 @@ function SanPham() {
   const [items, setItems] = useState([]);
   const getItems = async () => {
     axios
-      .get("http://tmdt-server.herokuapp.com/SanPham/")
+      .get("https://tmdt-client.onrender.com/SanPham/")
       .then(async (res) => {
         const result= await res.data.data;
         await setItems(result);

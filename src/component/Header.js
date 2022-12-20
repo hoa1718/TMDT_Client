@@ -10,7 +10,7 @@ function Header() {
   const [type, setType] = useState([]);
   const getHang = async () => {
     axios
-      .get("http://tmdt-server.herokuapp.com/Hang/")
+      .get("https://tmdt-client.onrender.com/Hang/")
       .then(async (res) => {
         await setHang(res.data.data);
       })
@@ -20,7 +20,7 @@ function Header() {
   };
   const getType = async () => {
     axios
-      .get("http://tmdt-server.herokuapp.com/PhanLoai/")
+      .get("https://tmdt-client.onrender.com/PhanLoai/")
       .then(async (res) => {
         await setType(res.data.data);
       })
