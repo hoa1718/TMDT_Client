@@ -1,6 +1,7 @@
 {
   "name": "tmdt",
   "homepage": ".",
+  "proxy": "https://tmdt-client-7vfwhl58f-hoa1718.vercel.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
